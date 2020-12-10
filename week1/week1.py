@@ -73,7 +73,6 @@ class VideoFaceDetection:
         print(f"Height : { self.Height}")
         print("---------- Start ----------")
         
-
 if __name__ == "__main__":
 
     parser = ArgumentParser()

@@ -14,19 +14,23 @@ class FaceDetection(object):
     print("Press Enter to exit")
     if gpu:
       while(True):
-        ret, frame = Capture.read()
+        ret, frame = self.Capture.read()
         small_frame = cv2.resize(frame, (0, 0), fx=0.25, fy=0.25)
 
         rgb_frame = small_frame[:, :, ::-1]
         face_locations = face_recognition.face_locations(rgb_frame,model="cnn")
 
         for top, right, bottom, left in face_locations:
-            cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), cv2.LINE_AA)
+          top *= 4
+          right *= 4
+          bottom *= 4
+          left *= 4
+          cv2.rectangle(frame, (left, top), (right, bottom), (255, 0, 255),2)
 
         cv2.imshow('FaceDetection', frame)
         # enter = ascii 13
         if cv2.waitKey(2) == 13:
-          Capture.release()
+          self.Capture.release()
           cv2.destroyAllWindows()
           break
     else:
